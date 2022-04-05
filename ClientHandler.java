@@ -32,14 +32,13 @@ public class ClientHandler implements Runnable {
 
 	@Override
 	public void run(){
-		String meassageFromClient;
+		String messageFromClient;
 
 		while (socket.isConnected()) {
 			try {
-				meassageFromClient= bufferedReader.readLine();
-				System.out.println(meassageFromClient);
-				broadcastMessage(meassageFromClient);
-				if(".exit".equals(meassageFromClient)){
+				messageFromClient= bufferedReader.readLine();
+				broadcastMessage(messageFromClient);
+				if(".exit".equals(messageFromClient)){
 					System.out.println("closing socket");
 					closeEverything(socket, bufferedReader, bufferedWriter);
 					break;	
