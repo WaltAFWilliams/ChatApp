@@ -18,8 +18,12 @@ public class ServerThead extends Server implements Runnable{
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			userName = socket.getRemoteSocketAddress().toString();
-			System.out.println("user@ " + userName + " has join the chat room.");
-			print("user@ " + userName + " has join the chat room.");
+			System.out.println("user@ " + userName + " has joined the chat room.");
+			print("user@ " + userName + " has joined the chat room.");
+			print("List of all users in the chatroom:");
+			for (Socket socket : sockets) {
+				print(socket.getRemoteSocketAddress().toString());
+			}
 
 			boolean done = false;
 			while (!done){
@@ -48,18 +52,18 @@ public class ServerThead extends Server implements Runnable{
 		PrintWriter outPut = null;
 		synchronized (sockets){
 		for (Socket sc : sockets){
-			outPut = new PrintWriter(sc.getOutputStream());
-			outPut.println(msg);
-			outPut.flush();
+				outPut = new PrintWriter(sc.getOutputStream());
+				outPut.println(msg);
+				outPut.flush();
 		}
-	}
+		}
 	}
 
 		//@throws
 
 	public void closeConnect() throws IOException{
-		System.out.println("user@ " + userName + " quit the chat room.");
-		print("user@ " + userName + " quit the chat room.");
+		System.out.println("user@ " + userName + " has left the chat room.");
+		print("user@ " + userName + " has left the chat room.");
 		synchronized (sockets){
 			sockets.remove(socket);
 		}
