@@ -28,7 +28,7 @@ public class Client{
 
         String message = bufferedReader.readLine();
         while (!".exit".equalsIgnoreCase(message)){
-            outPut.println(message);
+            outPut.println(encrypt(message));
             outPut.flush();
             message = bufferedReader.readLine();
         }
@@ -38,5 +38,13 @@ public class Client{
 
 
 
+    }
+
+    private static String encrypt(String message){
+    String encrypted = "";
+        for(int i = 0; i < message.length(); i++){
+            encrypted += (char)(message.charAt(i) + 1); // A --> B   B --> C C --> D
+        }
+        return encrypted;
     }
 }

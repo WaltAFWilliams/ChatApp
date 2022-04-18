@@ -13,6 +13,14 @@ public class ServerThead extends Server implements Runnable{
 		this.socket = socket;
 	}
 
+	private String decrypt(String message){
+	  	String deencrypted = "";
+	  	for(int i = 0; i < message.length(); i++){
+	      	deencrypted += (char)(message.charAt(i) - 1); // B --> A   C --> B D --> C
+	    }
+	  	return deencrypted;
+	}
+
 	@Override
 	public void run(){
 		try {
@@ -32,10 +40,11 @@ public class ServerThead extends Server implements Runnable{
 					done = true;
 					continue;
 				}
-				String msg = "user@ " + userName + " :	" + message;
+				String msg = "user@ " + userName + " : " + decrypt(message);
 				System.out.println(msg);
 				print(msg);
 			}
+
 
 			closeConnect();
 		} catch (IOException e) {
@@ -46,6 +55,7 @@ public class ServerThead extends Server implements Runnable{
 			}
 		}
 	}
+
 
 
 	private void print(String msg) throws IOException{
