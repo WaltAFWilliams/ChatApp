@@ -40,9 +40,10 @@ public class ServerThead extends Server implements Runnable{
 					done = true;
 					continue;
 				}
-				String msg = "user@ " + userName + " : " + decrypt(message);
-				System.out.println(msg);
-				print(msg);
+				String encryptedMsg = "user@ " + userName + " : (encrypted) " + message;
+				String decryptedMsg = "user@ " + userName + " : (decrypted) " + decrypt(message);
+				print(encryptedMsg);
+				print(decryptedMsg);
 			}
 
 
